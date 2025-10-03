@@ -1,20 +1,27 @@
 import React from "react";
 
-export default function Menu({ menuItems }) {
+function Menu({ items, category }) {
+  const filteredItems =
+    category === "All"
+      ? items
+      : items.filter((item) => item.category === category);
+
   return (
-    <div className="menu-list">
-      {menuItems.map((item) => (
-        <div
-          key={item.id}
-          className="menu-item"
-          data-test-id={`menu-item-${item.category.toLowerCase()}`}
+    <ul>
+      {filteredItems.map(({ id, name, category, price, image }) => (
+        <li
+          key={id}
+          data-test-id={`menu-item-${category.toLowerCase()}`}
+          className={`menu-item-${category.toLowerCase()}`}
         >
-          <img src={item.img} alt={item.name} />
-          <h3>{item.name}</h3>
-          <p>{item.price}</p>
-          <span className="category">{item.category}</span>
-        </div>
+          <h3>{name}</h3>
+          <img src={image} alt={name} width="150" />
+          <p>Category: {category}</p>
+          <p>Price: ${price.toFixed(2)}</p>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
+
+export default Menu;
