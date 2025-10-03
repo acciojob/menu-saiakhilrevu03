@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Menu from "./Menu";
-import "./styles/App.css";  
+import "../styles/styles.css"; 
 
 const dishes = [
   { id: 1, name: "Pancakes", category: "Breakfast", price: "$5", img: "https://via.placeholder.com/100" },
