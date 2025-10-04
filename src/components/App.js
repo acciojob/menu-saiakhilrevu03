@@ -1,72 +1,74 @@
-import React, { useState } from "react";
-import Menu from "./Menu";
+import React, { useState } from 'react';
+import Menu from './Menu';
 
-const menuItems = [
+const menuData = [
   {
     id: 1,
-    name: "Pancakes",
-    category: "Breakfast",
-    price: 5.99,
-    image: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=800&q=80",
+    name: 'Pancakes',
+    category: 'Breakfast',
+    price: '$5',
+    image: 'https://via.placeholder.com/150',
   },
   {
     id: 2,
-    name: "Eggs Benedict",
-    category: "Breakfast",
-    price: 7.99,
-    image: "https://images.unsplash.com/photo-1562967916-eb82221dfb22?auto=format&fit=crop&w=800&q=80",
+    name: 'Burger',
+    category: 'Lunch',
+    price: '$10',
+    image: 'https://via.placeholder.com/150',
   },
   {
     id: 3,
-    name: "Burger",
-    category: "Lunch",
-    price: 9.99,
-    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80",
+    name: 'Chocolate Shake',
+    category: 'Shakes',
+    price: '$7',
+    image: 'https://via.placeholder.com/150',
   },
   {
     id: 4,
-    name: "Caesar Salad",
-    category: "Lunch",
-    price: 8.99,
-    image: "https://images.unsplash.com/photo-1556910103-1ec8a4e7e9c8?auto=format&fit=crop&w=800&q=80",
+    name: 'Omelette',
+    category: 'Breakfast',
+    price: '$6',
+    image: 'https://via.placeholder.com/150',
   },
   {
     id: 5,
-    name: "Strawberry Shake",
-    category: "Shakes",
-    price: 4.99,
-    image: "https://images.unsplash.com/photo-1497534446932-c925b458314e?auto=format&fit=crop&w=800&q=80",
+    name: 'Grilled Cheese',
+    category: 'Lunch',
+    price: '$8',
+    image: 'https://via.placeholder.com/150',
   },
   {
     id: 6,
-    name: "Chocolate Shake",
-    category: "Shakes",
-    price: 4.99,
-    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80",
+    name: 'Vanilla Shake',
+    category: 'Shakes',
+    price: '$6',
+    image: 'https://via.placeholder.com/150',
   },
 ];
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [category, setCategory] = useState('All');
+
+  // Filter items based on selected category
+  const filteredMenu = category === 'All'
+    ? menuData
+    : menuData.filter(item => item.category === category);
 
   return (
     <div id="main">
       <h1>Menu</h1>
       <div>
-        <button
-          id="filter-btn-1"
-          onClick={() => setSelectedCategory("Breakfast")}
-        >
+        <button id="filter-btn-1" onClick={() => setCategory('Breakfast')}>
           Breakfast
         </button>
-        <button id="filter-btn-2" onClick={() => setSelectedCategory("Lunch")}>
+        <button id="filter-btn-2" onClick={() => setCategory('Lunch')}>
           Lunch
         </button>
-        <button id="filter-btn-3" onClick={() => setSelectedCategory("Shakes")}>
+        <button id="filter-btn-3" onClick={() => setCategory('Shakes')}>
           Shakes
         </button>
       </div>
-      <Menu items={menuItems} category={selectedCategory} />
+      <Menu items={filteredMenu} selectedCategory={category} />
     </div>
   );
 }
