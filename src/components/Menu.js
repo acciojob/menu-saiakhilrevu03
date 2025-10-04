@@ -1,26 +1,31 @@
-import React from "react";
+import React from 'react';
 
-function Menu({ items, category }) {
-  const filteredItems =
-    category === "All"
-      ? items
-      : items.filter((item) => item.category === category);
-
+function Menu({ items, selectedCategory }) {
   return (
-    <ul>
-      {filteredItems.map(({ id, name, category, price, image }) => (
-        <li
-          key={id}
-          data-test-id={`menu-item-${category.toLowerCase()}`}
-          className={`menu-item-${category.toLowerCase()}`}
-        >
-          <h3>{name}</h3>
-          <img src={image} alt={name} width="150" />
-          <p>Category: {category}</p>
-          <p>Price: ${price.toFixed(2)}</p>
-        </li>
-      ))}
-    </ul>
+    <div className="menu">
+      {items.map((item) => {
+        const dataTestId =
+          item.category === 'Breakfast'
+            ? 'menu-item-breakfast'
+            : item.category === 'Lunch'
+            ? 'menu-item-lunch'
+            : 'menu-item-shakes';
+
+        return (
+          <div
+            key={item.id}
+            data-test-id={dataTestId}
+            className={`menu-item menu-item-${item.category.toLowerCase()}`}
+            style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}
+          >
+            <h3>{item.name}</h3>
+            <img src={item.image} alt={item.name} width="150" />
+            <p>Category: {item.category}</p>
+            <p>Price: {item.price}</p>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
